@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.matheusguimaraes.cursomc.domain.Categoria;
 import com.matheusguimaraes.cursomc.domain.Cidade;
+import com.matheusguimaraes.cursomc.domain.Cliente;
+import com.matheusguimaraes.cursomc.domain.Endereco;
 import com.matheusguimaraes.cursomc.domain.Estado;
 import com.matheusguimaraes.cursomc.domain.Produto;
+import com.matheusguimaraes.cursomc.domain.enums.TipoCliente;
 import com.matheusguimaraes.cursomc.repositories.CategoriaRepository;
 import com.matheusguimaraes.cursomc.repositories.CidadeRepository;
+import com.matheusguimaraes.cursomc.repositories.ClienteRepository;
+import com.matheusguimaraes.cursomc.repositories.EnderecoRepository;
 import com.matheusguimaraes.cursomc.repositories.EstadoRepository;
 import com.matheusguimaraes.cursomc.repositories.ProdutoRepository;
 
@@ -27,6 +32,10 @@ public class CursomcApplication implements CommandLineRunner{
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository EnderecoRepository;
 	
 	
 	public static void main(String[] args) {
@@ -70,5 +79,21 @@ public class CursomcApplication implements CommandLineRunner{
 		//Primeiro salvar os estados
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
+		
+		//CLIENTE-ENDEREÇO
+		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "Maria@gmail.com", "0567616350", TipoCliente.PESSOAFISICA);		
+		cli1.getTelefones().addAll(Arrays.asList("61982040721", "7133453984"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 103", "Jardim", "41830400", cli1, c1);
+		Endereco e2 = new Endereco(null, "Avenida Matos", "105", "Sala 800", "Centro", "70660045", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		EnderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		
+		
 	}
 }
