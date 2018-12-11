@@ -3,8 +3,6 @@ package com.matheusguimaraes.cursomc.dto;
 import java.io.Serializable;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.matheusguimaraes.cursomc.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
