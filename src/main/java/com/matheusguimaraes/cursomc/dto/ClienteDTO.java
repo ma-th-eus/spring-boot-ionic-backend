@@ -3,10 +3,13 @@ package com.matheusguimaraes.cursomc.dto;
 import java.io.Serializable;
 
 import javax.validation.constraints.Email;
+
 import org.hibernate.validator.constraints.Length;
 
 import com.matheusguimaraes.cursomc.domain.Cliente;
+import com.matheusguimaraes.cursomc.services.validation.ClienteUpdate;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
